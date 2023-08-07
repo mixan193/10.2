@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace _10._2
 {
+    [Serializable]
     public class Client
     {
         public int id;

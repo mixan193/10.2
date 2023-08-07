@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +12,20 @@ namespace _10._2
     {
         public static List<Client> clients = new List<Client>();
         public static int GetCount { get { return clients.Count; } }
+        static ClientsDB()
+        {
+            if (File.Exists("DB.dat"))
+            {
+                FileStream fs = new FileStream("DB.dat", FileMode.Open, FileAccess.Read);
+                clients = (List<Client>)new BinaryFormatter().Deserialize(fs);
+            }
+        }
         public static int AddClient(Client client)
         {
             clients.Add(client);
+            FileStream fs = new FileStream("DB.dat", FileMode.OpenOrCreate, FileAccess.Write);
+            new BinaryFormatter().Serialize(fs, clients);
+            fs.Close();
             return clients.Count;
         }
         /// <summary>

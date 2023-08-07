@@ -30,6 +30,7 @@ namespace _10._2
                 {
                     case ConsoleKey.D1:
                         ChooseAMethodToFind();
+                        Console.ReadKey();
                         break;
                     case ConsoleKey.D2:
                         Console.WriteLine(GetAllClientsInStrings(ClientsDB.clients.ToArray()));
@@ -57,17 +58,17 @@ namespace _10._2
                     Console.Clear();
                     Console.WriteLine("Введите ФИО через пробел");
                     string[] strings = Console.ReadLine().Split(new char[] { ' ' });
-                    ClientsDB.GetClient(strings[0], strings[1], strings[2]);
+                    client = ClientsDB.GetClient(strings[0], strings[1], strings[2]);
                     break;
                 case ConsoleKey.D2:
                     Console.Clear();
                     Console.WriteLine("Введите ИД");
-                    ClientsDB.GetClient(int.Parse(Console.ReadLine()));
+                    client = ClientsDB.GetClient(int.Parse(Console.ReadLine()));
                     break;
                 case ConsoleKey.D3:
                     Console.Clear();
                     Console.WriteLine("Введите номер телефона");
-                    ClientsDB.GetClient(Console.ReadLine());
+                    client = ClientsDB.GetClient(Console.ReadLine());
                     break;
                 default:
                     Console.WriteLine("Вы ничего не выбрали");
